@@ -542,7 +542,7 @@ const MediaPortfolioSection = () => {
       id: 1,
       title: "Introduction TXS",
       category: "Video",
-      image: "/images/show reel.png",
+      image: "/images/show%20reel.png",
       description: "TXS is a media based company which provides the products of content creation, video editing, sales and software development.",
       videoSrc: "/videos/SHOW_REEL_V1.mp4"
     },
@@ -565,7 +565,7 @@ const MediaPortfolioSection = () => {
       id: 3,
       title: "Chris Sample",
       category: "Video",
-      image: "/images/chriss sample.jpg",
+      image: "/images/chriss%20sample.jpg",
       description: "Personal portfolio showcase featuring Chris's work and creative projects",
       videoSrc: "/videos/chris sample.mp4"
     },
@@ -573,7 +573,7 @@ const MediaPortfolioSection = () => {
       id: 4,
       title: "Money Our Friend",
       category: "Video",
-      image: "/images/friend money.webp",
+      image: "/images/friend%20money.webp",
       description: "Financial education and money management content promoting healthy financial habits",
       videoSrc: "/videos/MONEY_OUR_FRIEND_V1 (1).mp4"
     },
@@ -589,7 +589,7 @@ const MediaPortfolioSection = () => {
       id: 6,
       title: "Basketball Final",
       category: "Video",
-      image: "/images/basketball player.jpg",
+      image: "/images/basketball%20player.jpg",
       description: "Final scripted production featuring basketball player content and sports entertainment",
       videoSrc: "/videos/scripted final rev.mp4"
     },
@@ -711,11 +711,18 @@ const MediaPortfolioSection = () => {
                   }
                 }}
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden bg-gray-800">
                   <ImageWithFallback
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    style={{ minHeight: '256px', backgroundColor: '#374151' }}
+                    onError={(e) => {
+                      console.error('Image failed to load:', item.image, e);
+                    }}
+                    onLoad={() => {
+                      console.log('Image loaded successfully:', item.image);
+                    }}
                   />
                   
                   {/* Overlay */}

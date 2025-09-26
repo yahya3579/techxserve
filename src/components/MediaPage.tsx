@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { VideoPlayer } from "./VideoPlayer";
 import { 
   ArrowRight,
   Camera,
@@ -524,52 +525,88 @@ const MediaAboutSection = () => (
 // Portfolio section
 const MediaPortfolioSection = () => {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [selectedVideo, setSelectedVideo] = useState(null);
   
-  const filters = ["All", "Video", "Design", "Branding"];
+  // const filters = ['All', 'Video', 'Design', 'Branding']
+  const filters = ["All", "Video",];
   
   const portfolioItems = [
+    // {
+    //   id: 1,
+    //   title: "Cyberpunk Brand Identity",
+    //   category: "Branding",
+    //   image: "https://images.unsplash.com/photo-1704018731115-cdec06f3f067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGJyYW5kaW5nJTIwcG9ydGZvbGlvJTIwbW9ja3VwJTIwZGFya3xlbnwxfHx8fDE3NTY1OTEyNDF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    //   description: "Complete visual identity for a futuristic tech startup"
+    // },
     {
       id: 1,
-      title: "Cyberpunk Brand Identity",
-      category: "Branding",
-      image: "https://images.unsplash.com/photo-1704018731115-cdec06f3f067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGJyYW5kaW5nJTIwcG9ydGZvbGlvJTIwbW9ja3VwJTIwZGFya3xlbnwxfHx8fDE3NTY1OTEyNDF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Complete visual identity for a futuristic tech startup"
+      title: "Introduction TXS",
+      category: "Video",
+      image: "/images/show reel.png",
+      description: "TXS is a media based company which provides the products of content creation, video editing, sales and software development.",
+      videoSrc: "/videos/SHOW_REEL_V1.mp4"
     },
+    // {
+    //   id: 3,
+    //   title: "Digital Interface Design",
+    //   category: "Design",
+    //   image: "https://images.unsplash.com/photo-1604611714877-a8108b03132f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWduJTIwY3JlYXRpdmUlMjB3b3Jrc3BhY2UlMjBkYXJrJTIwdGhlbWV8ZW58MXx8fHwxNzU2NTkxMjM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    //   description: "Sleek UI/UX design for next-generation applications"
+    // },
     {
       id: 2,
-      title: "Motion Graphics Reel",
+      title: "Chess Strategy",
       category: "Video",
-      image: "https://images.unsplash.com/photo-1755997268370-56418ad174c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMHByb2R1Y3Rpb24lMjBlZGl0aW5nJTIwdGltZWxpbmUlMjBkYXJrJTIwaW50ZXJmYWNlfGVufDF8fHx8MTc1NjU5MTI0Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Dynamic motion graphics showcasing advanced animation techniques"
+      image: "/images/chess.jpeg",
+      description: "Strategic chess gameplay and analysis showcasing advanced tactics and competitive play",
+      videoSrc: "/videos/chess sample.mp4"
     },
     {
       id: 3,
-      title: "Digital Interface Design",
-      category: "Design",
-      image: "https://images.unsplash.com/photo-1604611714877-a8108b03132f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWduJTIwY3JlYXRpdmUlMjB3b3Jrc3BhY2UlMjBkYXJrJTIwdGhlbWV8ZW58MXx8fHwxNzU2NTkxMjM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Sleek UI/UX design for next-generation applications"
+      title: "Chris Sample",
+      category: "Video",
+      image: "/images/chriss sample.jpg",
+      description: "Personal portfolio showcase featuring Chris's work and creative projects",
+      videoSrc: "/videos/chris sample.mp4"
     },
     {
       id: 4,
-      title: "Corporate Video Production",
+      title: "Money Our Friend",
       category: "Video",
-      image: "https://images.unsplash.com/photo-1558982423-f8e8a5c75426?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3Rpb24lMjBncmFwaGljcyUyMGRlc2lnbiUyMGFuaW1hdGlvbiUyMGRhcmslMjBjb21wdXRlcnxlbnwxfHx8fDE3NTY1OTEyNTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Professional video content for enterprise clients"
+      image: "/images/friend money.webp",
+      description: "Financial education and money management content promoting healthy financial habits",
+      videoSrc: "/videos/MONEY_OUR_FRIEND_V1 (1).mp4"
     },
     {
       id: 5,
-      title: "Abstract Art Direction",
-      category: "Design",
-      image: "https://images.unsplash.com/photo-1607184023678-63ea486d62cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMGFic3RyYWN0JTIwbmVvbiUyMHBhcnRpY2xlcyUyMGRhcmt8ZW58MXx8fHwxNzU2NTkxMjIwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Experimental digital art and creative direction"
+      title: "Sabrina Carpenter",
+      category: "Video",
+      image: "/images/sabrina.jpg",
+      description: "Music video or promotional content featuring Sabrina Carpenter's artistic performance",
+      videoSrc: "/videos/Sabrina Carpenter.mp4"
     },
     {
       id: 6,
-      title: "Brand Activation Campaign",
-      category: "Branding",
-      image: "https://images.unsplash.com/photo-1652200180551-933639e38e1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMG1lZGlhJTIwcHJvZHVjdGlvbiUyMHZpZGVvJTIwY2FtZXJhJTIwZGFyayUyMHN0dWRpb3xlbnwxfHx8fDE3NTY1OTEyMzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "Comprehensive brand experience and activation strategy"
+      title: "Basketball Final",
+      category: "Video",
+      image: "/images/basketball player.jpg",
+      description: "Final scripted production featuring basketball player content and sports entertainment",
+      videoSrc: "/videos/scripted final rev.mp4"
     },
+    // {
+    //   id: 5,
+    //   title: "Abstract Art Direction",
+    //   category: "Design",
+    //   image: "https://images.unsplash.com/photo-1607184023678-63ea486d62cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZGlnaXRhbCUyMGFic3RyYWN0JTIwbmVvbiUyMHBhcnRpY2xlcyUyMGRhcmt8ZW58MXx8fHwxNzU2NTkxMjIwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    //   description: "Experimental digital art and creative direction"
+    // },
+    // {
+    //   id: 6,
+    //   title: "Brand Activation Campaign",
+    //   category: "Branding",
+    //   image: "https://images.unsplash.com/photo-1652200180551-933639e38e1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMG1lZGlhJTIwcHJvZHVjdGlvbiUyMHZpZGVvJTIwY2FtZXJhJTIwZGFyayUyMHN0dWRpb3xlbnwxfHx8fDE3NTY1OTEyMzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    //   description: "Comprehensive brand experience and activation strategy"
+    // },
   ];
 
   const filteredItems = activeFilter === "All" 
@@ -665,7 +702,15 @@ const MediaPortfolioSection = () => {
               className="group cursor-pointer"
               whileHover={{ y: -10 }}
             >
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-cyan-900/20 border border-white/10 backdrop-blur-sm">
+              <div 
+                className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-cyan-900/20 border border-white/10 backdrop-blur-sm"
+                onClick={() => {
+                  if (item.category === "Video") {
+                    console.log('Card clicked:', item);
+                    setSelectedVideo(item);
+                  }
+                }}
+              >
                 <div className="relative h-64 overflow-hidden">
                   <ImageWithFallback
                     src={item.image}
@@ -679,8 +724,13 @@ const MediaPortfolioSection = () => {
                   {/* Play button for videos */}
                   {item.category === "Video" && (
                     <motion.div
-                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="absolute inset-0 flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer z-10"
                       whileHover={{ scale: 1.1 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Video clicked:', item);
+                        setSelectedVideo(item);
+                      }}
                     >
                       <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
                         <Play className="w-8 h-8 text-white ml-1" />
@@ -718,6 +768,21 @@ const MediaPortfolioSection = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Video Player Modal */}
+        {selectedVideo && (
+          <VideoPlayer
+            src={selectedVideo.videoSrc}
+            title={selectedVideo.title}
+            description={selectedVideo.description}
+            thumbnail={selectedVideo.image}
+            isOpen={!!selectedVideo}
+            onClose={() => {
+              console.log('Closing video player');
+              setSelectedVideo(null);
+            }}
+          />
+        )}
       </div>
     </section>
   );
